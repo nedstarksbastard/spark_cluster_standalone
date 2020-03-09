@@ -1,0 +1,35 @@
+version: "3.5"
+services:
+  spark-master-std:
+    image: fiziy/spark_standalone:latest
+    container_name: spark-master-std
+    hostname: spark-master-std
+    ports:
+      - "8080:8080"
+      - "7077:7077"
+    networks:
+      - spark-network
+    volumes:
+      - ./pysprk_jobs/:/pysprk_jobs
+    environment:
+      - "SPARK_LOCAL_IP=spark-master-std"
+      - "SPARK_MASTER_PORT=7077"
+      - "SPARK_MASTER_WEBUI_PORT=8080"
+    command: "/run_master.sh"
+  spark-worker-std:
+    image: fiziy/spark_standalone:latest
+    depends_on:
+      - spark-master-std
+    ports:
+      - 8080
+    networks:
+      - spark-network
+    environment:
+      - "SPARK_MASTER=spark://spark-master-std:7077"
+      - "SPARK_WORKER_WEBUI_PORT=8080"
+    command: "/run_worker.sh"
+networks:
+  spark-network:
+    driver: bridge
+    ipam:
+      driver: default

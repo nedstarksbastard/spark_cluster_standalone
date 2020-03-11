@@ -22,6 +22,9 @@ you have just added to the folder
 Based on `openjdk:8-alpine`. Installed `apache spark` and `python 3.7.6` and additional python packages namely -
 `pandas, numpy, pyspark and flask`. 
 
+Available at https://hub.docker.com/repository/docker/fiziy/spark_standalone. The total size is 1.73 gb so it
+could do with some pruning
+
 ### Docker-compose
 
 Starts a spark master node that also hosts a minimal flask server to see and run all the jobs added to the 

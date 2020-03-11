@@ -2,7 +2,7 @@ from pyspark.sql import SparkSession
 import random
 
 spark = SparkSession.builder \
-    .master("spark://localhost:7077") \
+    .master("spark://spark-master-std:7077") \
     .appName("Spark Test App") \
     .getOrCreate()
 

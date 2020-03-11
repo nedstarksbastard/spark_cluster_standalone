@@ -21,6 +21,8 @@ ENV SPARK_HOME /spark
 # Copy scripts for running spark master and slave
 COPY scripts/run_master.sh /run_master.sh
 COPY scripts/run_worker.sh /run_worker.sh
+COPY job_server.py /job_server.py
+COPY templates /templates
 
 # Install components for Python
 RUN apk add --no-cache --update \
@@ -35,7 +37,8 @@ RUN apk add --no-cache --update \
     libc6-compat \
     linux-headers \
     build-base \
-    procps
+    procps \
+    ca-certificates
 
 
 # Set Python version
@@ -52,7 +55,8 @@ ENV PATH $PYENV_HOME/shims:$PYENV_HOME/bin:$PATH
 RUN pyenv install $PYTHON_VERSION
 RUN pyenv global $PYTHON_VERSION
 RUN pip install --upgrade pip && pyenv rehash
-RUN pip install pyspark numpy pandas
+RUN pip install flask pyspark
+#RUN pip install pyspark numpy pandas
 
 # Clean
 RUN rm -rf ~/.cache/pip

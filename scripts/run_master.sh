@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo "Starting flask server"
-flask run --host=0.0.0.0 --port=8000 &> logs/flask_server.log &
+flask run --host=0.0.0.0 --port=8000 &> flask_server.log &
 
 echo "Starting Spark master"
 /spark/bin/spark-class org.apache.spark.deploy.master.Master \

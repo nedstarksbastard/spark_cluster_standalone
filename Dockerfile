@@ -55,7 +55,7 @@ ENV PATH $PYENV_HOME/shims:$PYENV_HOME/bin:$PATH
 RUN pyenv install $PYTHON_VERSION
 RUN pyenv global $PYTHON_VERSION
 RUN pip install --upgrade pip && pyenv rehash
-RUN pip install flask pyspark
+RUN pip install flask pyspark numpy pandas
 #RUN pip install pyspark numpy pandas
 
 # Clean
